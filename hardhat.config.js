@@ -9,6 +9,10 @@
     defaultNetwork: "ropsten",
     networks: {
        hardhat: {},
+       rinkeby: {
+         url: API_URL,
+         accounts: [`0x${PRIVATE_KEY}`]
+      },
        ropsten: {
           url: API_URL,
           accounts: [`0x${PRIVATE_KEY}`]

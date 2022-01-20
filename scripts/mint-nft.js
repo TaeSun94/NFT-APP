@@ -8,7 +8,7 @@ const web3 = createAlchemyWeb3(API_URL)
 
 const contract = require("../artifacts/contracts/MyNFT.sol/MyNFT.json")
 //배포한 컨트렉트 주소
-const contractAddress = "0x8bD147A93a082afdcb201e47029bDb456Cb33d2c"
+const contractAddress = "0x6EB9271EA02f5cBF7088962e333E399Bd6D8a244"
 const nftContract = new web3.eth.Contract(contract.abi, contractAddress)
 
 async function mintNFT(tokenURI) {

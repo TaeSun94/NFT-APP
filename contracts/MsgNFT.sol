@@ -8,11 +8,11 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 
 //누구나 컨트랙트에 접근하여 민팅을 하려한다면 Ownable과 mintNFT에서 onlyOwner라는 Modifier를 제거해야함.
-contract MyNFT is ERC721URIStorage, Ownable {
+contract MSGN is ERC721URIStorage, Ownable {
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIds;
 
-    constructor() public ERC721("MyNFT", "NFT") {}
+    constructor() public ERC721("MSGN", "NFT") {}
 
     function mintNFT(address recipient, string memory tokenURI)
         public onlyOwner
