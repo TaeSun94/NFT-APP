@@ -13,5 +13,12 @@
           url: API_URL,
           accounts: [`0x${PRIVATE_KEY}`]
        }
+       /*
+       다른 네트워크 추가
+       네트워크이름: {
+            url: 'DApp api url',
+            accouns: ['Contract owner account's Private Key']
+       }
+       */
     },
  }
