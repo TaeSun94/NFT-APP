@@ -6,9 +6,9 @@ const PRIVATE_KEY = process.env.PRIVATE_KEY
 const { createAlchemyWeb3 } = require("@alch/alchemy-web3")
 const web3 = createAlchemyWeb3(API_URL)
 
-const contract = require("../artifacts/contracts/MyNFT.sol/MyNFT.json")
+const contract = require("../artifacts/contracts/MsgNFT.sol/MSGN.json")
 //배포한 컨트렉트 주소
-const contractAddress = "0x6EB9271EA02f5cBF7088962e333E399Bd6D8a244"
+const contractAddress = "0xc70Eb49FFe45d87081d3934069C475Bd5BC87D25"
 const nftContract = new web3.eth.Contract(contract.abi, contractAddress)
 
 async function mintNFT(tokenURI) {
