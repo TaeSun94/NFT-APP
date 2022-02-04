@@ -2,48 +2,47 @@
 pragma solidity ^0.8.2;
 
 import "./SafeMath.sol";
-import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
-
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 contract SafeStorage{
-    ERC20 public token;
 
-    event Store(uint256 amount);
-    event Out(uint256 amount);
-    address tokenAddress = 0xc41B5E5f8EBa25c77B38aaf01AcC62eE7d4E5F30;
-
-    // constructor() public {
-    //     token = new ERC20();
-    // }
-
+    event Deposit(uint256 amount);
+    event WithDrawal(uint256 amount);
+    address public owner;
     using SafeMath for uint256;
     mapping(address => uint256) public storageBalance;
 
-    // function setStorage() public {
-    //     storageBalance[msg.sender] = 0;
-    // }
-    
-    function deposit(uint256 _amount) public returns (uint256){
-        ERC20(tokenAddress).approve(msg.sender, _amount);
-        ERC20(tokenAddress).transferFrom(msg.sender, address(this),_amount);
+    function getBalance(address _token, address _owner) public view returns (uint256) {
+        return IERC20(_token).balanceOf(_owner);
+    }
+    function getMe() public view returns(address){
+        return msg.sender;
+    }
+
+    constructor(){
+        owner = msg.sender;
+    }
+
+    function deposit(address token, uint256 _amount) public{
+        IERC20(token).approve(address(this), IERC20(token).balanceOf(msg.sender));
+        IERC20(token).transferFrom(msg.sender, address(this), _amount);
         if(storageBalance[msg.sender] == 0){
             storageBalance[msg.sender] = _amount;
         }
         else{
-            storageBalance[msg.sender]= storageBalance[msg.sender].add(_amount);
+            // storageBalance[msg.sender] = storageBalance[msg.sender].add(_amount);
+            storageBalance[msg.sender] += _amount;
         }
-        emit Store(_amount);
-        return storageBalance[msg.sender];
+        emit Deposit(_amount);
     }
 
     function getMyStorageBalance(address _owner) public view returns (uint256){
-        require(msg.sender == _owner);
-        return storageBalance[msg.sender];
+        return storageBalance[_owner];
     }
 
-    function withDrawal(uint256 _amount) public returns (uint256){
-        ERC20(tokenAddress).transfer(msg.sender,_amount);
-        storageBalance[msg.sender] = storageBalance[msg.sender].sub(_amount);
-        emit Out(_amount);
-        return storageBalance[msg.sender];
+    function withDrawal(address token, uint256 _amount) public {
+        IERC20(token).transfer(msg.sender,_amount);
+        // storageBalance[msg.sender] = storageBalance[msg.sender].sub(_amount);
+        storageBalance[msg.sender] -= _amount;
+        emit WithDrawal(_amount);
     }
 }
