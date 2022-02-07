@@ -108,6 +108,7 @@ contract DEX {
 
     function sell(uint256 amount) public {
         require(amount > 0, "You need to sell at least some tokens");
+        token.approve(address(this), amount);
         token.allowance(msg.sender, address(this));
         uint256 allowance = token.allowance(msg.sender, address(this));
         require(allowance >= amount, "Check the token allowance");
