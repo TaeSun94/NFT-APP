@@ -33,16 +33,16 @@ describe("Safe Storage contract", function () {
 
 //DEX Test
 describe("Token contract", function () {
-    let Token;
+    let Token = '0xc41B5E5f8EBa25c77B38aaf01AcC62eE7d4E5F30';
     let hardhatToken;
-    let owner;
+    let owner = '0x9EfBDc0bE3b154EC193fE402640D2343e1EC4980';
     let addr1;
     let addr2;
     let addrs;
   
     beforeEach(async function () {
-      Token = await ethers.getContractFactory("DEX");
-      [owner, addr1, addr2, ...addrs] = await ethers.getSigners();
+      Token = await ethers.getContractFactory("Test");
+    //   [owner, addr1, addr2, ...addrs] = await ethers.getSigners();
       hardhatToken = await Token.deploy();
     });
   
@@ -52,15 +52,12 @@ describe("Token contract", function () {
     //   });
     // });
     describe("Transaction", function(){
-        it("Buy Test", async function(){
-            await hardhatToken.buy();
-            console.log(await hardhatToken.getBalance());
-            expect(await hardhatToken.getBalance()).to.equal(1);
+        it("Get Balance Test", async function(){
+            await hardhatToken.getBalance(Token,owner);
+            console.log(await hardhatToken.getBalance(Token,owner));
         });
-
-        it("Sell Test", async function(){
-            await hardhatToken.sell(2);
-            expect(await hardhatToken.getBalance()).to.equals(3);
+        it("Get ERC20 Token Test", async function(){
+            console.log(await hardhatToken.getERC20Token(Token,owner));
         })
     });
 });
