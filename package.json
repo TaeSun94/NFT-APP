@@ -10,15 +10,18 @@
   "license": "ISC",
   "dependencies": {
     "@alch/alchemy-web3": "^1.1.9",
-    "@openzeppelin/contracts": "^4.4.2",
+    "@openzeppelin/contracts": "^4.5.0",
     "@openzeppelin/contracts-upgradeable": "^4.4.2",
     "chai": "^4.3.6",
     "dotenv": "^14.2.0",
-    "hardhat": "^2.8.2"
+    "hardhat": "^2.8.2",
+    "keccak256": "^1.0.6",
+    "merkletreejs": "^0.2.27"
   },
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.4",
     "@nomiclabs/hardhat-etherscan": "^3.0.0",
     "ethers": "^5.5.3"
-  }
+  },
+  "type": "module"
 }
